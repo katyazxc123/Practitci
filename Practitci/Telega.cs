@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Practitci
 {
-    internal class Telega
+    class Telega
     {
         private List<Book> items = new List<Book>();
 
-        public void AddItem(Book book)
+        public void Add(Book book)
         {
-            items.Add(item);
+            items.Add(book);
         }
 
-        public void RemoveItem(int id)
+        public void RemoveBook(int id)
         {
-            items.RemoveAll(b=>b.Id == id);
+            items.RemoveAll(b => b.Id == id);
         }
 
         public List<Book> GetItems()
@@ -29,6 +26,5 @@ namespace Practitci
         {
             return items.Sum(b => b.Price);
         }
-
     }
 }
