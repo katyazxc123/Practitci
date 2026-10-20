@@ -8,8 +8,8 @@ namespace Practitci
 {
     internal class Libriary1
     {
-        class Libriary
-        {
+        
+        
             private List<Book> books = new List<Book>();
             private int nextId = 1;
             public int Count
@@ -84,7 +84,7 @@ namespace Practitci
                 return books.GroupBy(b => b.Author)
                             .ToDictionary(g => g.Key, g => g.Count());
             }
-        }
+        
         
     }
 }
