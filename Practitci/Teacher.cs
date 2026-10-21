@@ -9,9 +9,9 @@ namespace Practitci
     internal class Teacher : Person
     {
         public string Kafedra { get; private set; }
-        public Teacher(int id, string name, int age, string email) : base(id, name, age, email)
+        public Teacher(int id, string name, int age, string email, string kafedra) : base(id, name, age, email)
         {
-            Kafedra = Kafedra
+            Kafedra = kafedra;
         }
 
         public override string Role
@@ -19,7 +19,7 @@ namespace Practitci
             get { return "Преподаватель"; }
         }
 
-        public overridde string Info()
+        public override string Info()
         {
             return base.Info() + $", Кафедра: {Kafedra}";
         }

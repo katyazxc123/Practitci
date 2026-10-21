@@ -24,7 +24,7 @@ namespace Practitci
         public abstract string Role { get; }
         public virtual string Info()
         {
-            return $"Id: {Id}, Name: {Name}, Age: {Age}, Email: {Email}, Role: {Role}";
+            return $"Id: {Id}, Имя: {Name}, Возраст: {Age}, Email: {Email}, Роль: {Role}";
         }
 
     }

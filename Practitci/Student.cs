@@ -22,7 +22,7 @@ namespace Practitci
 
         public override string Info()
         {
-            return base.Info() + $", Group: {Group}";
+            return base.Info() + $", Группа: {Group}";
         }
 
 

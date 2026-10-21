@@ -9,7 +9,7 @@ namespace Practitci
 {
     internal class University
     {
-        private List<Student> people = new List<Student>();
+        private List<Student> students = new List<Student>();
         private List<Teacher> teachers = new List<Teacher>();
         private List<Course> courses = new List<Course>();  
         private int nextIdStudent = 1;

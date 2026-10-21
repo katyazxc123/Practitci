@@ -32,9 +32,9 @@ namespace Practitci
             Teacher = teacher;
         }
 
-        public bool HasStudent()
+        public bool HasStudent(Student student)
         {
-            return students.Contains(students);
+            return students.Contains(student);
         }
 
         public bool AddStudent(Student student)
@@ -59,7 +59,7 @@ namespace Practitci
             {
                 a = Teacher.Name;
             }
-            return $"Id:{Id}, Title: {Title}, Hours: {Hours} ч, Преподаватель: {a}, Студентов: {StudentCount}";
+            return $"Id:{Id}, Название курса: {Title}, Часы: {Hours} ч, Преподаватель: {a}, Студентов: {StudentCount}";
         }
 
        
