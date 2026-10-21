@@ -7,8 +7,7 @@ namespace Practitci
     internal class Program
     {
         static Library libriary = new Library();
-        static Telega telega = new Telega();
-
+   
         static void Main(string[] args)
         {
             AddTestBooks();
@@ -26,9 +25,6 @@ namespace Practitci
                 Console.WriteLine("6. Сортировать по году");
                 Console.WriteLine("7. Самая дорогая книга и самая дешёвая книга");
                 Console.WriteLine("8. Количество книг по авторам");
-                Console.WriteLine("9. Вставить блок книг");
-                Console.WriteLine("10. Добавить книгу в корзину");
-                Console.WriteLine("11. Показать корзину");
                 Console.WriteLine("0. Выход");
                 Console.Write("Ваш выбор: ");
 
@@ -57,15 +53,6 @@ namespace Practitci
                         break;
                     case "8":
                         ShowAuthors();
-                        break;
-                    case "9":
-                        ImportBlock();
-                        break;
-                    case "10":
-                        AddToTelega();
-                        break;
-                    case "11":
-                        ShowTelega();
                         break;
                     case "0":
                         work = false;
@@ -103,7 +90,7 @@ namespace Practitci
             int id = ReadInt("ID книги для удаления: ", 1, int.MaxValue);
             if (libriary.Remove(id))
             {
-                telega.RemoveBook(id);
+              
                 Console.WriteLine("Книга удалена.");
             }
             else
@@ -150,57 +137,7 @@ namespace Practitci
             foreach (KeyValuePair<string, int> pair in authors)
                 Console.WriteLine($"{pair.Key}: {pair.Value} шт.");
         }
-
-        static void ImportBlock()
-        {
-            Console.WriteLine("Вставьте книги, по одной в строке:");
-            Console.WriteLine("Название;Автор;Жанр;Год;Цена");
-            Console.WriteLine("Жанры: Roman, Fantasy, Detective, Poetry");
-            Console.WriteLine("Чтобы закончить, нажмите Enter на пустой строке.");
-
-            int added = 0;
-            int lineNumber = 0;
-            while (true)
-            {
-                string line = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(line))
-                    break;
-
-                lineNumber++;
-                string error;
-                if (TryAddFromLine(line, out error))
-                    added++;
-                else
-                    Console.WriteLine($"Строка {lineNumber} пропущена: {error}");
-            }
-            Console.WriteLine($"Добавлено книг: {added}");
-        }
-
-        static void AddToTelega()
-        {
-            int id = ReadInt("ID книги: ", 1, int.MaxValue);
-            Book book = libriary.FindById(id);
-            if (book == null)
-            {
-                Console.WriteLine("Книга с таким ID не найдена.");
-                return;
-            }
-            telega.Add(book);
-            Console.WriteLine($"В корзину добавлена: {book.GetInfo()}");
-        }
-
-        static void ShowTelega()
-        {
-            List<Book> items = telega.GetItems();
-            if (items.Count == 0)
-            {
-                Console.WriteLine("Корзина пуста.");
-                return;
-            }
-            PrintBooks(items);
-            Console.WriteLine($"Итого к оплате: {telega.GetTotal()} руб.");
-        }
-
+            
         static void PrintBooks(List<Book> list)
         {
             if (list.Count == 0)
@@ -268,63 +205,6 @@ namespace Practitci
             string normalized = s.Trim().Replace(',', '.');
             return decimal.TryParse(normalized, NumberStyles.Number, CultureInfo.InvariantCulture, out price)
                    && price > 0;
-        }
-
-        static bool TryParseGenre(string s, out Genre genre)
-        {
-            foreach (Genre g in Enum.GetValues(typeof(Genre)))
-            {
-                if (g.ToString().ToLower() == s.Trim().ToLower())
-                {
-                    genre = g;
-                    return true;
-                }
-            }
-            genre = Genre.Roman;
-            return false;
-        }
-
-        static bool TryAddFromLine(string line, out string error)
-        {
-            string[] parts = line.Split(';');
-            if (parts.Length != 5)
-            {
-                error = "нужно 5 значений через «;»";
-                return false;
-            }
-
-            string title = parts[0].Trim();
-            string author = parts[1].Trim();
-            if (title == "" || author == "")
-            {
-                error = "пустое название или автор";
-                return false;
-            }
-
-            Genre genre;
-            if (!TryParseGenre(parts[2], out genre))
-            {
-                error = $"неизвестный жанр «{parts[2].Trim()}»";
-                return false;
-            }
-
-            int year;
-            if (!int.TryParse(parts[3].Trim(), out year) || year < Book.MinYear || year > DateTime.Now.Year)
-            {
-                error = $"год должен быть от {Book.MinYear} до {DateTime.Now.Year}";
-                return false;
-            }
-
-            decimal price;
-            if (!TryParsePrice(parts[4], out price))
-            {
-                error = "цена должна быть числом больше 0";
-                return false;
-            }
-
-            libriary.Add(title, author, genre, year, price);
-            error = "";
-            return true;
         }
     }
 }
