@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4085B6F3-C7F6-4595-9CBB-4C3871A999AB}</ProjectGuid>
+    <ProjectGuid>{E422D35A-1DB6-FD01-9A46-E8B49B511BB1}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Practitci</RootNamespace>
     <AssemblyName>Practitci</AssemblyName>
@@ -43,8 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Course.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Student.cs" />
+    <Compile Include="Teacher.cs" />
+    <Compile Include="University.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
